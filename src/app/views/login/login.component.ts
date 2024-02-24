@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TempAuthService } from '../../services/temp-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   constructor(
-    private router : Router
+    private router : Router,
+    private tempAuthService : TempAuthService
   ) {}
 
   errorMessage : string = "Please enter a valid username and password."
