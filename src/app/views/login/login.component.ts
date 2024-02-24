@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { TempAuthService } from '../../services/temp-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +10,6 @@ export class LoginComponent {
 
   constructor(
     private router : Router,
-    private tempAuthService : TempAuthService
   ) {}
 
   errorMessage : string = "Please enter a valid username and password."
@@ -29,7 +27,7 @@ export class LoginComponent {
   }
 
 
-  private isLoginValid() : boolean {
+  isLoginValid() : boolean {
     return this.username == "testing" && this.password === "testing";
   }
 }
