@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TempAuthService } from '../../services/temp-auth.service';
+import { LoginPresenterService } from '../../presenters/login/login-presenter.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ export class LoginComponent {
 
   constructor(
     private router : Router,
-    private tempAuthService : TempAuthService
+    private tempAuthService : TempAuthService,
+    private loginPresenter : LoginPresenterService
   ) {}
  
   errorMessage : string = "Please enter a valid username and password."
@@ -21,11 +23,22 @@ export class LoginComponent {
 
    
   handleLogin() {
-    if (this.isAuthenticated()) {
-      this.router.navigate(["/profiles"]);
-    } else {
-      this.invalidLogin = true;
-    }
+    this.loginPresenter.handleJWTAuthentication(
+      this.username, this.password, this.onLoginSuccess.bind(this), this.onError.bind(this));
+
+
+    // if (this.isAuthenticated()) {
+    //   this.router.navigate(["/profiles"]);
+    // } else {
+    //   this.invalidLogin = true;
+    // }
+  }
+  onError() {
+    this.invalidLogin = true;
+  }
+  onLoginSuccess() {
+    this.router.navigate(["/profiles"]);
+    this.invalidLogin = false;
   }
 
   isAuthenticated() {
