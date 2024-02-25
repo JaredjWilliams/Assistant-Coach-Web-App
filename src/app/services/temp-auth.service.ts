@@ -21,7 +21,6 @@ export class TempAuthService {
   }
 
   isUserLoggedIn() {
-    console.log(sessionStorage.getItem('authenticatedUser'));
     let user = sessionStorage.getItem('authenticatedUser');
     return !(user === null);
   }
