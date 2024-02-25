@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TempAuthService } from './temp-auth.service';
+import { AUTHENTICATED_USER } from '../app.constants';
 
 describe('TempAuthService', () => {
   let service: TempAuthService;
@@ -29,19 +30,19 @@ describe('TempAuthService', () => {
   });
 
   it('should check if a user is logged in', () => {
-    sessionStorage.setItem('username', 'testing');
+    sessionStorage.setItem(AUTHENTICATED_USER, 'testing');
     const result = service.isUserLoggedIn();
     expect(result).toBe(true);
   });
 
   it('should check if a user is not logged in', () => {
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem(AUTHENTICATED_USER);
     const result = service.isUserLoggedIn();
     expect(result).toBe(false);
   });
 
   it('should log out a user', () => {
-    sessionStorage.setItem('username', 'testing');
+    sessionStorage.setItem(AUTHENTICATED_USER, 'testing');
     service.logOut();
     const result = service.isUserLoggedIn();
     expect(result).toBe(false);

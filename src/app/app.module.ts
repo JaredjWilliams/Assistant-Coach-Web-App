@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { HeaderComponent } from './views/header/header.component';
 import { FooterComponent } from './views/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ProfilesComponent } from './views/profiles/profiles.component';
+import { HttpInterceptorService } from './services/http/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { ProfilesComponent } from './views/profiles/profiles.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

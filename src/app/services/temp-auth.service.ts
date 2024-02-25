@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AUTHENTICATED_USER } from '../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +8,14 @@ export class TempAuthService {
 
   constructor() { }
 
+  getAuthenticatedToken() {
+    return this.getAuthenticatedUser() != null ? 
+      sessionStorage.getItem(AUTHENTICATED_USER) : null;
+  }
+
   authenticate(username : string, password : string) {
     if (this.isValid(username, password)) {
-      sessionStorage.setItem("authenticatedUser", username);
+      sessionStorage.setItem(AUTHENTICATED_USER, username);
       return true;
     }
 
@@ -21,12 +27,16 @@ export class TempAuthService {
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('authenticatedUser');
+    let user = sessionStorage.getItem(AUTHENTICATED_USER);
     return !(user === null);
+  }
+
+  getAuthenticatedUser() {
+    return sessionStorage.getItem(AUTHENTICATED_USER);
   }
   
 
   logOut() {
-    sessionStorage.removeItem('authenticatedUser');
+    sessionStorage.removeItem(AUTHENTICATED_USER);
   }
 }
