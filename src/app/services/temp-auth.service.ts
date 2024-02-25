@@ -21,12 +21,12 @@ export class TempAuthService {
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('username');
+    let user = sessionStorage.getItem('authenticatedUser');
     return !(user === null);
   }
   
 
   logOut() {
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('authenticatedUser');
   }
 }

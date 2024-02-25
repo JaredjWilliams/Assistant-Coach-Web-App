@@ -7,7 +7,7 @@ import { RouteGuardService } from './services/guard/route-guard.service';
 const routes: Routes = [
   { path:'', component: LoginComponent},
   { path:'login', component: LoginComponent},
-  { path:'profiles', component: ProfilesComponent, canActivate: [RouteGuardService]},
+  { path:'profiles', component: ProfilesComponent, canActivate:[RouteGuardService]},
 ];
 
 @NgModule({
